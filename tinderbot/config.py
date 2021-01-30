@@ -3,12 +3,9 @@ import sys
 import os
 
 # MAIN DIRECTORIES
-root_dir        = (os.path.dirname(os.path.realpath(__file__)))
-libs_dir        = os.path.join(root_dir,"Libs")
-information_dir = os.path.join(root_dir,"Information")
-log_dir         = os.path.join(information_dir,'LogFiles')
-database_dir    = os.path.join(root_dir,'Database')
-pic_dir         = os.path.join(database_dir,'Pictures')
+LOG_DIRECTORY               = os.path.join('docs','logs')
+DATABASE_DIRECTORY          = os.path.join('tinderbot','database')
+TINDER_PICTURE_DIRECTORY    = os.path.join('data','pictures','tinder')
 
 # database
 host="localhost"

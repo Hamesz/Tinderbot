@@ -1,6 +1,6 @@
-from Libs.TinderAPI.tinder_api import session
-from Libs.TinderAPI.tinder_api.utils import request_handlers as r
-from Libs.TinderAPI.tinder_api.utils.wrapper import JsonWrapper
+from tinderbot.TinderAPI.tinder_api import session
+from tinderbot.TinderAPI.tinder_api.utils import request_handlers as r
+from tinderbot.TinderAPI.tinder_api.utils.wrapper import JsonWrapper
 
 import os
 import json

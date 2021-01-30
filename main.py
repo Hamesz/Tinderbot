@@ -2,15 +2,16 @@
 import os, sys, time
 import itertools
 from datetime import datetime
-from Database.update import add_user, check_user_exists, get_user_pic_path
-# sys.modules.keys()
 import requests
-from Libs.TinderAPI.tinder_api import session
-from Libs.FaceRecognition.recognition import find_owner
-from config import pic_dir
+
+from tinderbot.database.commands import add_user, check_user_exists, get_user_pic_path
+from tinderbot.TinderAPI.tinder_api import session
+from tinderbot.FaceRecognition.recognition import find_owner
+from tinderbot.config import TINDER_PICTURE_DIRECTORY
+import tinderbot.Logger
+
 sess = session.Session() # inits the session
 import logging
-import Logger
 import matplotlib.pyplot as plt
 
 logger = logging.getLogger("Logger")
@@ -20,20 +21,23 @@ def main():
 
 def classify_users():
     for user in itertools.islice(sess.yield_users(), 100):
-        print(user.__get_info__())
+        logger.debug(user.__get_info__())
         if(check_user_exists(user.id) == False):
             # store user details into database
             stored = store_details(user)
-            print("Stored: {}".format(stored))
-            # get face
-            pic_path = get_user_pic_path(user.id)
-            pictures = os.listdir(pic_path)
-            pictures = [os.path.join(pic_path,picture) for picture in pictures]
-            face, picture = find_owner(pictures)
-            print("face:\n{}".format(face))
-            imageplot = plt.imshow(face)
-            plt.show()
-            # get bio analysis
+            if (stored):
+                logger.info("Stored user: {} ({})".format(user.name, user.id))
+                
+                # get face
+                pic_path = get_user_pic_path(user.id)
+                pictures = os.listdir(pic_path)
+                pictures = [os.path.join(pic_path,picture) for picture in pictures]
+                face, picture = find_owner(pictures)
+
+                logger.debug("face:\n{}".format(face))
+                imageplot = plt.imshow(face)
+                plt.show()
+                # get bio analysis
             
             # classify person
             
@@ -43,15 +47,15 @@ def classify_users():
 
 # deal with storing
 def store_details(user):
-    print("adding user")
+    logger.debug("adding user")
     # create picture directory
-    pic_dir = os.path.join('Database','Pictures',"{}_{}".format(user.id,user.name))
-    os.mkdir(pic_dir)
+    picture_directory = os.path.join(TINDER_PICTURE_DIRECTORY,"{}_{}".format(user.id,user.name))
+    os.mkdir(picture_directory)
     # update database
-    success = add_user(uid=user.id,name=user.name,age=user.age,bio=user.bio,classification=1,pictures_path_relative=pic_dir.replace("\\","/"))
+    success = add_user(uid=user.id,name=user.name,age=user.age,bio=user.bio,classification=1,pictures_path_relative=picture_directory) #.replace("\\","/")
     if (success):
         # download and store pictures
-        download_photos(user, pic_dir)
+        download_photos(user, picture_directory)
         return True
     else:
         return False

@@ -1,20 +1,18 @@
-from Database.database_connector import connect
+from tinderbot.database.database_connector import connect
 from datetime import datetime
 import mysql.connector
 import logging
-import Logger
+import tinderbot.Logger
 import string
 import os
 import sys
 
 
-dir_current = (os.path.dirname(os.path.realpath(__file__)))
-dir_root    = os.path.join(dir_current,"..")
-sys.path.append(dir_root)
+# dir_current = (os.path.dirname(os.path.realpath(__file__)))
+# dir_root    = os.path.join(dir_current,"..")
+# sys.path.append(dir_root)
 
 logger = logging.getLogger("Logger")
-# printable chars
-printable = set(string.printable)
 
 def add_user(uid,name,age,bio,classification,pictures_path_relative):
     """ Add a user to the sql database
@@ -34,6 +32,7 @@ def add_user(uid,name,age,bio,classification,pictures_path_relative):
     connection = connect()
     mycursor = connection.cursor()
     # remove non-ascii
+    printable = set(string.printable)
     bio=str("".join(filter(lambda x: x in printable, bio)))
 
     # add new user to database

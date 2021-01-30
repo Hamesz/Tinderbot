@@ -3,13 +3,14 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 import os,sys
-dir_FaceRecognition = (os.path.dirname(os.path.realpath(__file__)))
-dir_Libs            = os.path.join(dir_FaceRecognition,"..")
-dir_root            = os.path.join(dir_Libs,"..")
-sys.path.append(dir_root)
+
+# dir_FaceRecognition = (os.path.dirname(os.path.realpath(__file__)))
+# dir_Libs            = os.path.join(dir_FaceRecognition,"..")
+# dir_root            = os.path.join(dir_Libs,"..")
+# sys.path.append(dir_root)
 
 import logging
-import Logger
+import tinderbot.Logger
 import ast
 
 logger = logging.getLogger("Logger")

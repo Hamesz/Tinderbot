@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from Libs.TinderAPI.tinder_api.utils import config
+from tinderbot.TinderAPI.tinder_api.utils import config
 
 
 def get(url):

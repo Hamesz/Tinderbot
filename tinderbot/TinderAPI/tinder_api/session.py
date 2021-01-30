@@ -1,8 +1,8 @@
 import requests
 
-from Libs.TinderAPI.tinder_api import user as u
-from Libs.TinderAPI.tinder_api.utils import config as c
-from Libs.TinderAPI.tinder_api.utils import request_handlers as r
+from tinderbot.TinderAPI.tinder_api import user as u
+from tinderbot.TinderAPI.tinder_api.utils import config as c
+from tinderbot.TinderAPI.tinder_api.utils import request_handlers as r
 
 
 class Session():

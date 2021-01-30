@@ -7,18 +7,17 @@ dir_current = (os.path.dirname(os.path.realpath(__file__)))
 dir_root    = os.path.join(dir_current,"..")
 sys.path.append(dir_root)
 
-from config import information_dir, log_dir
-import os
+from tinderbot.config import LOG_DIRECTORY
 
 # Create a custom logger
 logger = logging.getLogger(__name__)
 
 # Path of log file
-if (os.path.exists(log_dir)==False):
-    os.mkdir(log_dir)
-log_path_info  = os.path.join(log_dir,'file_info.log')
-log_path_error = os.path.join(log_dir,'file_error.log')
-log_path_debug = os.path.join(log_dir,'file_debug.log')
+if (os.path.exists(LOG_DIRECTORY)==False):
+    os.mkdir(LOG_DIRECTORY)
+log_path_info  = os.path.join(LOG_DIRECTORY,'file_info.log')
+log_path_error = os.path.join(LOG_DIRECTORY,'file_error.log')
+log_path_debug = os.path.join(LOG_DIRECTORY,'file_debug.log')
 
 # Create handlers
 c_handler = logging.StreamHandler()

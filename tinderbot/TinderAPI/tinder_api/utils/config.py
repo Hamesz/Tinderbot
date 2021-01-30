@@ -1,7 +1,7 @@
 # with open("tinder_api/utils/token.txt", "r") as f:
 #     tinder_token = f.read()
 
-tinder_token = '1dd9cedd-f459-4d20-bdf9-a671c49a3a34'
+tinder_token = 'e368b164-fda9-4a4d-9978-975e425ab89b'
 
 # it is best for you to write in the token to save yourself the file I/O
 # especially if you have python byte code off
