@@ -8,7 +8,6 @@ from tinderbot.database.commands import add_user, check_user_exists, get_user_pi
 from tinderbot.TinderAPI.tinder_api import session
 from tinderbot.FaceRecognition.recognition import find_owner
 from tinderbot.config import TINDER_PICTURE_DIRECTORY
-# import tinderbot.Logger
 
 sess = session.Session() # inits the session
 import logging
@@ -41,6 +40,7 @@ def classify_users():
                 # get bio analysis
             
                 # classify person
+                
             else:
                 logger.warning("Storing user failed: {} ({})".format(user.name, user.id))
             
