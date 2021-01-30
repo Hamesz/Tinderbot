@@ -240,24 +240,24 @@ def test(pic1,pic2):
 
 def main():
     dir_FaceRecognition = (os.path.dirname(os.path.realpath(__file__)))
-    dir_Libs            = os.path.join(dir_FaceRecognition,"..")
-    dir_root            = os.path.join(dir_Libs,"..")
-    dir_Database        = os.path.join(dir_root,"Database")   
-    dir_Pictures        = os.path.join(dir_Database,"Pictures")
+    # dir_Libs            = os.path.join(dir_FaceRecognition,"..")
+    # dir_root            = os.path.join(dir_Libs,"..")
+    # dir_Database        = os.path.join(dir_root,"Database")   
+    # dir_Pictures        = os.path.join(dir_Database,"Pictures")
 
-    logger.setLevel(logging.DEBUG)
+    # logger.setLevel(logging.DEBUG)
 
-    dir_Eimera = os.path.join(dir_Pictures,os.listdir(dir_Pictures)[8])
-    dir_lizzie = "C:\\Users\\James H\\git\\TinderBot\\Database\\Pictures\\5e4c5d0a10ba09010017a892_Lizzie"
-    pics_Eimera = os.listdir(dir_lizzie)
-    for x in range(len(pics_Eimera)):
-        full_path = os.path.join(dir_lizzie,pics_Eimera[x])
-        pics_Eimera[x] = full_path
+    # dir_Eimera = os.path.join(dir_Pictures,os.listdir(dir_Pictures)[8])
+    # dir_lizzie = "C:\\Users\\James H\\git\\TinderBot\\Database\\Pictures\\5e4c5d0a10ba09010017a892_Lizzie"
+    # pics_Eimera = os.listdir(dir_lizzie)
+    # for x in range(len(pics_Eimera)):
+    #     full_path = os.path.join(dir_lizzie,pics_Eimera[x])
+    #     pics_Eimera[x] = full_path
 
-    print(pics_Eimera)
-    face = find_owner(pics_Eimera)
-    # test(pics_Eimera[0],pics_Eimera[1])
-    show_face(face)
+    # print(pics_Eimera)
+    # face = find_owner(pics_Eimera)
+    # # test(pics_Eimera[0],pics_Eimera[1])
+    # show_face(face)
    
 
     return
