@@ -8,20 +8,21 @@ from tinderbot.database.commands import add_user, check_user_exists, get_user_pi
 from tinderbot.TinderAPI.tinder_api import session
 from tinderbot.FaceRecognition.recognition import find_owner
 from tinderbot.config import TINDER_PICTURE_DIRECTORY
-import tinderbot.Logger
+# import tinderbot.Logger
 
 sess = session.Session() # inits the session
 import logging
 import matplotlib.pyplot as plt
 
-logger = logging.getLogger("Logger")
+logger = logging.getLogger("tinderbot.Logger")
+logger.setLevel(logging.DEBUG)
 
 def main():
     classify_users()
 
 def classify_users():
     for user in itertools.islice(sess.yield_users(), 100):
-        logger.debug(user.__get_info__())
+        logger.debug("Checking user {} ({})".format(user.name, user.id))
         if(check_user_exists(user.id) == False):
             # store user details into database
             stored = store_details(user)
@@ -39,9 +40,12 @@ def classify_users():
                 plt.show()
                 # get bio analysis
             
-            # classify person
+                # classify person
+            else:
+                logger.warning("Storing user failed: {} ({})".format(user.name, user.id))
             
         else:
+            logger.debug("User already stored")
             pass
         input()
 
