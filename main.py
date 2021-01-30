@@ -16,6 +16,9 @@ import matplotlib.pyplot as plt
 logger = logging.getLogger("tinderbot.Logger")
 logger.setLevel(logging.DEBUG)
 
+from PIL import Image
+import numpy as np
+
 def main():
     classify_users()
 
@@ -33,8 +36,6 @@ def classify_users():
                 pictures = os.listdir(pic_path)
                 pictures = [os.path.join(pic_path,picture) for picture in pictures]
                 face, picture = find_owner(pictures)
-
-                logger.debug("face:\n{}".format(face))
                 imageplot = plt.imshow(face)
                 plt.show()
                 # get bio analysis

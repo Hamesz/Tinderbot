@@ -1,5 +1,8 @@
 class Classifier():
 
+    def __init__(self, *args, **kwargs):
+        pass
+
     def __repr__():
         return f"{self.__name__}"
         

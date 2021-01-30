@@ -70,7 +70,7 @@ def find_owner(pictures):
             face location + picture path (array, string): location of the owners face for the given picture 
     """
     faces_dictionary = dict()
-    print("STARTING!!")
+    logger.debug("Finding Owner")
     for pic in pictures:
         a = get_occurence_of_face(pic, faces_dictionary)
         found= a[0]
@@ -81,12 +81,12 @@ def find_owner(pictures):
             face_location = faces_dictionary[key][1]
             picture_path = faces_dictionary[key][3]
             return face_location, picture_path
-    # print_face_occurence(faces_dictionary)
+    # logger.debug_face_occurence(faces_dictionary)
 
     face_location = faces_dictionary[key][1]
     picture_path = faces_dictionary[key][3]
-    print("face location\n{}".format(face_location))
-    print("picture path: {}".format(picture_path))
+    # logger.debug("face location\n{}".format(face_location))
+    # logger.debug("picture path: {}".format(picture_path))
     return face_location, picture_path
 
 def print_face_occurence(dict):
@@ -107,7 +107,7 @@ def get_occurence_of_face(pic,faces_dictionary):
         Returns:
             1 face detected (bool): True if only 1 face is detected
     """
-    print("picture: {}".format(pic))
+    logger.debug("picture: {}".format(pic))
     # get the loaction of all faces 
     faces = get_faces(pic)
     logger.debug(pic)
