@@ -3,12 +3,6 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 import os,sys
-
-# dir_FaceRecognition = (os.path.dirname(os.path.realpath(__file__)))
-# dir_Libs            = os.path.join(dir_FaceRecognition,"..")
-# dir_root            = os.path.join(dir_Libs,"..")
-# sys.path.append(dir_root)
-
 import logging
 import tinderbot.Logger
 import ast
@@ -78,12 +72,12 @@ def find_owner(pictures):
         if (found):
             logger.debug("Found face!")
             key = list(faces_dictionary.keys())[0]
-            face_location = faces_dictionary[key][1]
+            face = faces_dictionary[key][1]
             picture_path = faces_dictionary[key][3]
-            return face_location, picture_path
+            return face, picture_path
     # logger.debug_face_occurence(faces_dictionary)
 
-    face_location = faces_dictionary[key][1]
+    face = faces_dictionary[key][1]
     picture_path = faces_dictionary[key][3]
     # logger.debug("face location\n{}".format(face_location))
     # logger.debug("picture path: {}".format(picture_path))
@@ -96,16 +90,16 @@ def print_face_occurence(dict):
         show_face(face)
 
 def get_occurence_of_face(pic,faces_dictionary):
-    """
-        Updates the faces dictionary with the faces of the people in the picture by comparing the encodings,
-        If the person is not in the dictionary but seen in the picture then the person is removed from the dictionary.
+    """Updates the faces dictionary with the faces of the people in the picture by comparing the encodings,
+        If the person is in the dictionary but not seen in the picture then the person is removed from the dictionary.
 
         Args:
             pic (string): path to picture
-            faces_dictionary (dict): dictionary of {person:[encoding, face location, occurance, picture path]}
+            faces_dictionary (dict): dictionary of {person:[encoding, face, occurance, picture path]}
 
         Returns:
-            1 face detected (bool): True if only 1 face is detected
+            face detected (bool): True if only 1 face is detected
+            faces_dictionary (dict): dictionary of {person:[encoding, face, occurance, picture path]}
     """
     logger.debug("picture: {}".format(pic))
     # get the loaction of all faces 
