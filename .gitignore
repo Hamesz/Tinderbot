@@ -1,2 +1,7 @@
 /data
 tinderbot/classifier/mobileNetV2/model/
+.DS_Store
+.idea/
+tinderbot/.DS_Store
+tinderbot/classifier/.DS_Store
+tinderbot/classifier/mobileNetV2/.DS_Store
