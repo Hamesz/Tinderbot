@@ -5,6 +5,7 @@ from PIL import Image
 
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tinderbot.classifier.classifier import Classifier
+import matplotlib.pyplot as plt
 
 class MobileNetV2(Classifier):
     """
@@ -37,9 +38,12 @@ class MobileNetV2(Classifier):
         :return:            prediction class (hot/ugly) 1/-1
         """
         resized_img = self.reshape_image_array(img_array)
+        imageplot = plt.imshow(resized_img)
+        # plt.show()
+        # print("claszified")
         img_batch = np.expand_dims(resized_img, axis=0)
         img_preprocessed = preprocess_input(img_batch)
-        prediction = self.model.predict(img_preprocessed)
+        prediction = self.model.predict(img_batch)
         return prediction
     
     def reshape_image_array(self, image_array, new_shape=160):

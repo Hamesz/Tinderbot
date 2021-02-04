@@ -28,11 +28,17 @@ def get_faces(picture):
     for face_location in face_locations:
 
         # Print the location of each face in this image
-        top, right, bottom, left = face_location
-        logger.debug("A face is located at pixel location Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
+        old_top, old_right, old_bottom, old_left = face_location
+        logger.debug("A face is located at pixel location Top: {}, Left: {}, Bottom: {}, Right: {}".format(old_top, old_left, old_bottom, old_right))
 
+        # increase image size
+        bias = int((old_bottom - old_top)*0.5)
+        new_top = old_top - bias if old_top - bias > 0 else 0
+        new_bottom = old_bottom + bias if old_bottom + bias < image.shape[0] else image.shape[0] - 1
+        new_left = old_left - bias if old_left - bias > 0 else 0
+        new_right = old_right + bias if old_right + bias < image.shape[1] else image.shape[1] - 1
         # You can access the actual face itself like this:
-        face_image = image[top:bottom, left:right]
+        face_image = image[new_top:new_bottom, new_left:new_right]
         faces.append(face_image)
     return faces
 
@@ -76,12 +82,10 @@ def find_owner(pictures):
             picture_path = faces_dictionary[key][3]
             return face, picture_path
     # logger.debug_face_occurence(faces_dictionary)
-
+    key = list(faces_dictionary.keys())[0]
     face = faces_dictionary[key][1]
     picture_path = faces_dictionary[key][3]
-    # logger.debug("face location\n{}".format(face_location))
-    # logger.debug("picture path: {}".format(picture_path))
-    return face_location, picture_path
+    return face, picture_path
 
 def print_face_occurence(dict):
     for key,value in dict.items():
@@ -159,12 +163,13 @@ def get_occurence_of_face(pic,faces_dictionary):
     return False,faces_dictionary
 
 def plot_comapre_2(imgLr,imgRr,blocking=True):
+    logger.warning("Displaying face comparisons!")
     f = plt.figure()
     f.add_subplot(1,2,1)
     plt.imshow(imgLr)
     f.add_subplot(1,2,2)
     plt.imshow(imgRr)
-    plt.show(block=blocking)
+    plt.show()
 
 
 def test(pic1,pic2):

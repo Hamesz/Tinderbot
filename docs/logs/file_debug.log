@@ -1,3 +1,46 @@
-[DEBUG]: Checking user Paige (5ed1ad37c3aa000100ad18bc)
+[DEBUG]: ====================
+[DEBUG]: Checking user: Carly (5e7bc80420414d01000d9e91)
+[INFO]: Classification: 2.650561571121216
 [DEBUG]: adding user
-[INFO]: Stored user: Paige (5ed1ad37c3aa000100ad18bc)
+[INFO]: Stored user: Carly (5e7bc80420414d01000d9e91)
+[DEBUG]: ====================
+[DEBUG]: Checking user: Emily (5fc2a24a83ceae01006c8866)
+[DEBUG]: User already stored
+[DEBUG]: ====================
+[DEBUG]: Checking user: Leah (5c4e36d00f1ab21100b8375e)
+[INFO]: Classification: 2.4676902294158936
+[DEBUG]: adding user
+[INFO]: Stored user: Leah (5c4e36d00f1ab21100b8375e)
+[DEBUG]: ====================
+[DEBUG]: Checking user: amy (5f0238db365f680100a99a08)
+[INFO]: Classification: 0.8891641497612
+[DEBUG]: adding user
+[INFO]: Stored user: amy (5f0238db365f680100a99a08)
+[DEBUG]: ====================
+[DEBUG]: Checking user: Tiegan (5d7a8b4ffc3c54bc758e55fa)
+[INFO]: Classification: 1.8241504430770874
+[DEBUG]: adding user
+[INFO]: Stored user: Tiegan (5d7a8b4ffc3c54bc758e55fa)
+[DEBUG]: ====================
+[DEBUG]: Checking user: Lauryn (5f11f9871348ac010056d7f8)
+[DEBUG]: User already stored
+[DEBUG]: ====================
+[DEBUG]: Checking user: Gráinne (601c7a88f97e2c0100ca118a)
+[INFO]: Classification: 0.8004572987556458
+[DEBUG]: adding user
+[INFO]: Stored user: Gráinne (601c7a88f97e2c0100ca118a)
+[DEBUG]: ====================
+[DEBUG]: Checking user: Ishbel (5d8508c56b0491aa0aeaecfd)
+[INFO]: Classification: 2.8373024463653564
+[DEBUG]: adding user
+[INFO]: Stored user: Ishbel (5d8508c56b0491aa0aeaecfd)
+[DEBUG]: ====================
+[DEBUG]: Checking user: Zuzanna (5e51c195641b660100c223df)
+[INFO]: Classification: -2.0971407890319824
+[DEBUG]: adding user
+[INFO]: Stored user: Zuzanna (5e51c195641b660100c223df)
+[DEBUG]: ====================
+[DEBUG]: Checking user: Douglis (5f272e7cdcdc000100953830)
+[INFO]: Classification: 1.6015734672546387
+[DEBUG]: adding user
+[INFO]: Stored user: Douglis (5f272e7cdcdc000100953830)

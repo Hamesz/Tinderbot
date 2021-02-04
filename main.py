@@ -4,7 +4,7 @@ from tinderbot.control import classify_users
 logger = logging.getLogger("tinderbot.Logger")
 logger.setLevel(logging.DEBUG)
 
-def main(no_users=10):
+def main(no_users=10,):
     try:
         classify_users(no_users)
     except KeyboardInterrupt:

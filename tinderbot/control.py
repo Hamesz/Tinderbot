@@ -7,6 +7,7 @@ from tinderbot.TinderAPI.tinder_api import session
 from tinderbot.FaceRecognition.recognition import find_owner
 from tinderbot.config import TINDER_PICTURE_DIRECTORY
 import matplotlib.pyplot as plt
+from tinderbot.classifier.mobileNetV2.mobileNetV2 import MobileNetV2
 import logging
 logger = logging.getLogger("tinderbot.Logger")
 
@@ -19,30 +20,33 @@ def classify_users(no_users):
         Returns:
             None
     """
-    sess = session.Session() # inits the session
+    # initalise tinder session
+    sess = session.Session()
+    # initialise classifier 
+    classifier = MobileNetV2()
     for user in itertools.islice(sess.yield_users(), no_users):
-        logger.debug("Checking user {} ({})".format(user.name, user.id))
-        if(check_user_exists(user.id) == False):
+        logger.debug("="*20)
+        logger.debug("Checking user: {} ({})".format(user.name, user.id))
+        if(check_user_exists(user.id) == False):\
+            # get face
+            face, picture = get_face_picture(user)
+            # get classification
+            classification = classifier.classify(face)[0,0]
+            logger.info(f"Classification: {classification}")
             # store user details into database
-            stored = store_details(user)
+            stored = store_details(user, classification=classification)
             if (stored):
                 logger.info("Stored user: {} ({})".format(user.name, user.id))
-                # get face
-                face, picture = get_face_picture(user.id)
                 imageplot = plt.imshow(face)
-                plt.show()
-                # get bio analysis
-
-                # classify person
-                
+                plt.show()               
             else:
                 logger.warning("Storing user failed: {} ({})".format(user.name, user.id))
         else:
             logger.debug("User already stored")
             pass
-        input()
+        # input()
 
-def get_face_picture(id):
+def get_face_picture(user):
     """Gets the users face from a given picture
 
         Args:
@@ -52,13 +56,20 @@ def get_face_picture(id):
             face (array): image of face as an array
             picture_path (string): path to the picture the face is from
     """
-    pic_path = get_user_pic_path(id)
-    pictures = os.listdir(pic_path)
-    pictures = [os.path.join(pic_path,picture) for picture in pictures]
+    # get the picture directory
+    picture_directory = os.path.join(TINDER_PICTURE_DIRECTORY,"{}_{}".format(user.id,user.name))
+    # check if directory exists
+    if(not os.path.isdir(picture_directory)):
+        os.mkdir(picture_directory)
+    # download the photos
+    download_photos(user, picture_directory)
+    # now get the owners face
+    pictures = os.listdir(picture_directory)
+    pictures = [os.path.join(picture_directory,picture) for picture in pictures]
     face, picture_path = find_owner(pictures)
     return face, picture_path
 
-def store_details(user):
+def store_details(user, classification=0):
     """Stored the users details into the database
 
         Args:
@@ -70,9 +81,12 @@ def store_details(user):
     logger.debug("adding user")
     # create picture directory
     picture_directory = os.path.join(TINDER_PICTURE_DIRECTORY,"{}_{}".format(user.id,user.name))
-    os.mkdir(picture_directory)
+    if(not os.path.isdir(picture_directory)):
+        os.mkdir(picture_directory)
+    # process classification 
+    classification = str("{:.5f}".format(classification))
     # update database
-    success = add_user(uid=user.id,name=user.name,age=user.age,bio=user.bio,classification=1,pictures_path_relative=picture_directory) #.replace("\\","/")
+    success = add_user(uid=user.id,name=user.name,age=user.age,bio=user.bio,classification=classification,pictures_path_relative=picture_directory) #.replace("\\","/")
     if (success):
         # download and store pictures
         download_photos(user, picture_directory)
