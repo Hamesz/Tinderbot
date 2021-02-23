@@ -21,7 +21,7 @@
 - Linear classifiers
 
 # Other
-##Suggestions:
+## Suggestions:
   - Use other pre-trained networks
   - Classification head tuning
   - Learning Rate
