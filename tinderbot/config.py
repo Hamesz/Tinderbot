@@ -10,5 +10,5 @@ TINDER_PICTURE_DIRECTORY    = os.path.join('data','pictures','tinder')
 # database
 host="localhost"
 user="root"
-passwd="fam4ev1*"
+passwd="passwd*"
 database="tinder"
